@@ -1,0 +1,15 @@
+name = "get-shit-done"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Serves everything in /public directly (index.html, etc.)
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# D1 database binding — after you run `wrangler d1 create gsd-db`,
+# paste the database_id it gives you below.
+[[d1_databases]]
+binding = "DB"
+database_name = "gsd-db"
+database_id = "REPLACE_WITH_YOUR_DATABASE_ID"
