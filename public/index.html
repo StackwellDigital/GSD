@@ -16,6 +16,7 @@
     --q5:#7cc576;
     --q15:#e0c341;
     --q60:#ef7c5f;
+    --error:#ff5c3c;
   }
   *{box-sizing:border-box;}
   body{
@@ -34,25 +35,32 @@
     text-transform:uppercase;
   }
   h1 span{color:var(--accent);}
-  .subtitle{
-    color:var(--dim);
-    font-size:0.8rem;
-    margin-bottom:4px;
+  .subtitle{color:var(--dim);font-size:0.8rem;margin-bottom:16px;}
+
+  /* auth screen */
+  #authScreen{
+    max-width:340px;
+    margin:60px auto 0;
+    text-align:center;
   }
-  .shared-note{
-    color:var(--accent);
-    font-size:0.75rem;
-    margin-bottom:16px;
-  }
-  .add-row{
+  #authScreen .tabs{
     display:flex;
-    gap:6px;
-    margin-bottom:14px;
-    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:16px;
+    justify-content:center;
   }
-  input[type=text]{
-    flex:1;
-    min-width:150px;
+  #authScreen .tab{
+    background:none;
+    border:1px solid var(--border);
+    color:var(--dim);
+    padding:8px 16px;
+    border-radius:6px;
+    font-family:inherit;
+    font-size:0.85rem;
+  }
+  #authScreen .tab.active{border-color:var(--accent);color:var(--accent);}
+  #authScreen input{
+    width:100%;
     background:var(--panel);
     border:1px solid var(--border);
     color:var(--text);
@@ -60,81 +68,69 @@
     border-radius:8px;
     font-family:inherit;
     font-size:0.95rem;
+    margin-bottom:8px;
   }
-  select{
-    background:var(--panel);
-    border:1px solid var(--border);
-    color:var(--text);
-    padding:10px 8px;
-    border-radius:8px;
-    font-family:inherit;
-  }
-  button{
-    font-family:inherit;
-    cursor:pointer;
-  }
-  .btn-add{
+  #authScreen .btn-auth{
+    width:100%;
     background:var(--accent);
     border:none;
     color:#111;
     font-weight:700;
     padding:10px 16px;
     border-radius:8px;
+    margin-top:4px;
+  }
+  #authError{color:var(--error);font-size:0.8rem;margin-top:8px;min-height:1em;}
+
+  /* app */
+  .add-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+  input[type=text]{
+    flex:1;min-width:150px;
+    background:var(--panel);border:1px solid var(--border);
+    color:var(--text);padding:10px 12px;border-radius:8px;
+    font-family:inherit;font-size:0.95rem;
+  }
+  select{
+    background:var(--panel);border:1px solid var(--border);
+    color:var(--text);padding:10px 8px;border-radius:8px;font-family:inherit;
+  }
+  button{font-family:inherit;cursor:pointer;}
+  .btn-add{
+    background:var(--accent);border:none;color:#111;font-weight:700;
+    padding:10px 16px;border-radius:8px;
   }
   .btn-add:disabled{opacity:0.5;cursor:default;}
   .status-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:var(--dim);
-    font-size:0.78rem;
-    margin-bottom:18px;
-    border-bottom:1px solid var(--border);
-    padding-bottom:10px;
+    display:flex;justify-content:space-between;align-items:center;
+    color:var(--dim);font-size:0.78rem;margin-bottom:18px;
+    border-bottom:1px solid var(--border);padding-bottom:10px;
+    flex-wrap:wrap;gap:8px;
   }
-  .btn-newday{
-    background:none;
-    border:1px solid var(--border);
-    color:var(--dim);
-    padding:6px 10px;
-    border-radius:6px;
-    font-size:0.75rem;
+  .status-right{display:flex;gap:8px;align-items:center;}
+  .btn-newday, .btn-logout{
+    background:none;border:1px solid var(--border);color:var(--dim);
+    padding:6px 10px;border-radius:6px;font-size:0.75rem;
   }
   .btn-newday:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-logout:hover{border-color:var(--dim);color:var(--text);}
   .quadrant{margin-bottom:18px;}
   .quadrant-header{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:0.75rem;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    color:var(--dim);
-    margin-bottom:6px;
+    display:flex;align-items:center;gap:8px;font-size:0.75rem;
+    text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:6px;
   }
   .dot{width:9px;height:9px;border-radius:50%;}
   .task-list{display:flex;flex-direction:column;gap:6px;}
   .task{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:10px 12px;
+    display:flex;align-items:center;gap:10px;
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:8px;padding:10px 12px;
   }
   .task.done{opacity:0.45;}
   .task.done .task-text{text-decoration:line-through;color:var(--dim);}
   .checkbox{
-    width:20px;height:20px;
-    min-width:20px;
-    border-radius:50%;
-    border:2px solid var(--dim);
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:0.75rem;
+    width:20px;height:20px;min-width:20px;border-radius:50%;
+    border:2px solid var(--dim);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:0.75rem;
   }
   .task.done .checkbox{background:var(--accent);border-color:var(--accent);color:#111;}
   .task-text{flex:1;font-size:0.92rem;word-break:break-word;}
@@ -143,31 +139,50 @@
   .del-btn:hover{color:var(--accent);}
   .all-done{text-align:center;padding:40px 10px;color:var(--dim);}
   .all-done .big{font-size:2rem;margin-bottom:6px;}
+  .hidden{display:none !important;}
 </style>
 </head>
 <body>
 
 <h1>Get Shit <span>Done</span></h1>
-<div class="subtitle" id="dateLabel">loading...</div>
-<div class="shared-note">⚡ shared list — anyone with this link sees the same tasks</div>
 
-<div class="add-row">
-  <input type="text" id="taskInput" placeholder="what needs doing?" maxlength="140">
-  <select id="quadSelect">
-    <option value="1">1 min</option>
-    <option value="5" selected>5 min</option>
-    <option value="15">15 min</option>
-    <option value="60">1 hour</option>
-  </select>
-  <button class="btn-add" id="addBtn">Add</button>
+<!-- AUTH SCREEN -->
+<div id="authScreen">
+  <div class="tabs">
+    <button class="tab active" id="tabLogin">Log in</button>
+    <button class="tab" id="tabSignup">Sign up</button>
+  </div>
+  <input type="text" id="authUsername" placeholder="username" autocomplete="username">
+  <input type="password" id="authPassword" placeholder="password" autocomplete="current-password">
+  <button class="btn-auth" id="authSubmit">Log in</button>
+  <div id="authError"></div>
 </div>
 
-<div class="status-bar">
-  <span id="progressLabel">loading...</span>
-  <button class="btn-newday" id="newDayBtn">Start New Day →</button>
-</div>
+<!-- APP -->
+<div id="app" class="hidden">
+  <div class="subtitle" id="dateLabel">loading...</div>
 
-<div id="quadrants"></div>
+  <div class="add-row">
+    <input type="text" id="taskInput" placeholder="what needs doing?" maxlength="140">
+    <select id="quadSelect">
+      <option value="1">1 min</option>
+      <option value="5" selected>5 min</option>
+      <option value="15">15 min</option>
+      <option value="60">1 hour</option>
+    </select>
+    <button class="btn-add" id="addBtn">Add</button>
+  </div>
+
+  <div class="status-bar">
+    <span id="progressLabel">loading...</span>
+    <div class="status-right">
+      <button class="btn-newday" id="newDayBtn">Start New Day →</button>
+      <button class="btn-logout" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div id="quadrants"></div>
+</div>
 
 <script>
 const QUADRANTS = [
@@ -178,21 +193,99 @@ const QUADRANTS = [
 ];
 
 let tasks = [];
+let authMode = 'login'; // or 'signup'
 
 function todayStr(){
   const d = new Date();
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
-
 function fmtDateLabel(){
   return new Date().toLocaleDateString(undefined,{weekday:'long', month:'short', day:'numeric'});
 }
 
-async function api(path, opts){
-  const res = await fetch(path, opts);
-  if(!res.ok) throw new Error('request failed: ' + res.status);
-  return res.json();
+async function api(path, opts={}){
+  const res = await fetch(path, { ...opts, credentials: 'same-origin' });
+  let data = null;
+  try{ data = await res.json(); }catch{}
+  if(!res.ok){
+    const msg = (data && data.error) ? data.error : ('request failed: ' + res.status);
+    throw new Error(msg);
+  }
+  return data;
 }
+
+// ---------- auth screen ----------
+
+document.getElementById('tabLogin').addEventListener('click', () => setAuthMode('login'));
+document.getElementById('tabSignup').addEventListener('click', () => setAuthMode('signup'));
+
+function setAuthMode(mode){
+  authMode = mode;
+  document.getElementById('tabLogin').classList.toggle('active', mode === 'login');
+  document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
+  document.getElementById('authSubmit').textContent = mode === 'login' ? 'Log in' : 'Sign up';
+  document.getElementById('authPassword').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
+  document.getElementById('authError').textContent = '';
+}
+
+document.getElementById('authSubmit').addEventListener('click', submitAuth);
+document.getElementById('authPassword').addEventListener('keydown', e => {
+  if(e.key === 'Enter') submitAuth();
+});
+
+async function submitAuth(){
+  const username = document.getElementById('authUsername').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errEl = document.getElementById('authError');
+  errEl.textContent = '';
+
+  if(!username || !password){
+    errEl.textContent = 'enter a username and password';
+    return;
+  }
+
+  try{
+    await api('/api/' + authMode, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ username, password })
+    });
+    showApp();
+  }catch(e){
+    errEl.textContent = e.message;
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  try{ await api('/api/logout', { method:'POST' }); }catch{}
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('authScreen').classList.remove('hidden');
+  document.getElementById('authUsername').value = '';
+  document.getElementById('authPassword').value = '';
+});
+
+// ---------- boot ----------
+
+async function checkSession(){
+  try{
+    const data = await api('/api/me');
+    if(data.authenticated){
+      showApp();
+    }else{
+      document.getElementById('authScreen').classList.remove('hidden');
+    }
+  }catch{
+    document.getElementById('authScreen').classList.remove('hidden');
+  }
+}
+
+async function showApp(){
+  document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  await loadState();
+}
+
+// ---------- app logic ----------
 
 async function loadState(){
   document.getElementById('dateLabel').textContent = fmtDateLabel();
@@ -202,6 +295,7 @@ async function loadState(){
   }catch(e){
     console.error(e);
     document.getElementById('progressLabel').textContent = 'connection error';
+    return;
   }
   render();
 }
@@ -309,12 +403,12 @@ function escapeHtml(str){
 }
 
 document.getElementById('addBtn').addEventListener('click', addTask);
-document.getElementById('taskInput').addEventListener('keydown', (e)=>{
+document.getElementById('taskInput').addEventListener('keydown', e => {
   if(e.key === 'Enter') addTask();
 });
 document.getElementById('newDayBtn').addEventListener('click', rollover);
 
-loadState();
+checkSession();
 </script>
 
 </body>
