@@ -1,4 +1,4 @@
-name = "get-shit-done"
+name = "gsd"
 main = "src/index.js"
 compatibility_date = "2026-01-01"
 
